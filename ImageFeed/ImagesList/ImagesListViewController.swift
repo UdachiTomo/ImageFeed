@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  ImageFeed
-//
-//  Created by User on 18.02.2023.
-//
-
 import UIKit
 
 extension ImagesListViewController: UITableViewDelegate {
