@@ -15,6 +15,10 @@
 		CE70F96929A122FF00716648 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE70F96729A122FF00716648 /* Main.storyboard */; };
 		CE70F96B29A1230000716648 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE70F96A29A1230000716648 /* Assets.xcassets */; };
 		CE70F96E29A1230000716648 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE70F96C29A1230000716648 /* LaunchScreen.storyboard */; };
+		CE748DED29B6428600C98A6A /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE748DEC29B6428600C98A6A /* SingleImageViewController.swift */; };
+		CECE56E329BE18D2000B34E2 /* Resourses.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE56E229BE18D2000B34E2 /* Resourses.swift */; };
+		CECE56E629BE1BAB000B34E2 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE56E529BE1BAB000B34E2 /* UIColor.swift */; };
+		CED4F7AB29B6105F00807B78 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F7AA29B6105F00807B78 /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +32,10 @@
 		CE70F96A29A1230000716648 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE70F96D29A1230000716648 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE70F96F29A1230000716648 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE748DEC29B6428600C98A6A /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
+		CECE56E229BE18D2000B34E2 /* Resourses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resourses.swift; sourceTree = "<group>"; };
+		CECE56E529BE1BAB000B34E2 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		CED4F7AA29B6105F00807B78 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +59,22 @@
 			path = ImagesList;
 			sourceTree = "<group>";
 		};
+		CE6C46E929B73D2A00B88608 /* ProfileView */ = {
+			isa = PBXGroup;
+			children = (
+				CED4F7AA29B6105F00807B78 /* ProfileViewController.swift */,
+			);
+			path = ProfileView;
+			sourceTree = "<group>";
+		};
+		CE6C46EA29B73D3800B88608 /* SingleImageView */ = {
+			isa = PBXGroup;
+			children = (
+				CE748DEC29B6428600C98A6A /* SingleImageViewController.swift */,
+			);
+			path = SingleImageView;
+			sourceTree = "<group>";
+		};
 		CE70F95529A122FF00716648 = {
 			isa = PBXGroup;
 			children = (
@@ -70,7 +94,10 @@
 		CE70F96029A122FF00716648 /* ImageFeed */ = {
 			isa = PBXGroup;
 			children = (
+				CECE56E429BE1B97000B34E2 /* Helpers */,
 				CE4945F729A65131001CE1B4 /* ImagesList */,
+				CE6C46EA29B73D3800B88608 /* SingleImageView */,
+				CE6C46E929B73D2A00B88608 /* ProfileView */,
 				CE70F96129A122FF00716648 /* AppDelegate.swift */,
 				CE70F96329A122FF00716648 /* SceneDelegate.swift */,
 				CE70F96729A122FF00716648 /* Main.storyboard */,
@@ -79,6 +106,15 @@
 				CE70F96F29A1230000716648 /* Info.plist */,
 			);
 			path = ImageFeed;
+			sourceTree = "<group>";
+		};
+		CECE56E429BE1B97000B34E2 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				CECE56E229BE18D2000B34E2 /* Resourses.swift */,
+				CECE56E529BE1BAB000B34E2 /* UIColor.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,8 +188,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CED4F7AB29B6105F00807B78 /* ProfileViewController.swift in Sources */,
 				CE70F96629A122FF00716648 /* ImagesListViewController.swift in Sources */,
 				CE4945F929A67F85001CE1B4 /* GradientCell.swift in Sources */,
+				CECE56E329BE18D2000B34E2 /* Resourses.swift in Sources */,
+				CECE56E629BE1BAB000B34E2 /* UIColor.swift in Sources */,
+				CE748DED29B6428600C98A6A /* SingleImageViewController.swift in Sources */,
 				CE4945F629A650EA001CE1B4 /* ImagesListCell.swift in Sources */,
 				CE70F96229A122FF00716648 /* AppDelegate.swift in Sources */,
 				CE70F96429A122FF00716648 /* SceneDelegate.swift in Sources */,

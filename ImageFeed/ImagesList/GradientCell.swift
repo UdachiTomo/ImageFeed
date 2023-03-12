@@ -9,9 +9,17 @@ import UIKit
 
 class GradientCell: UIView {
     
-    @IBInspectable private var starColor: UIColor?
+    @IBInspectable private var startColor: UIColor? {
+        didSet {
+            setupGredientColors()
+        }
+    }
     
-    @IBInspectable private var endColor: UIColor?
+    @IBInspectable private var endColor: UIColor? {
+        didSet {
+            setupGredientColors()
+        }
+    }
     
     private let gradientLayer = CAGradientLayer()
     
@@ -35,8 +43,8 @@ class GradientCell: UIView {
     }
     
     private func setupGredientColors() {
-        if let starColor = starColor, let endColor = endColor {
-            gradientLayer.colors = [starColor.cgColor, endColor.cgColor]
+        if let startColor = startColor, let endColor = endColor {
+            gradientLayer.colors = [startColor.cgColor, endColor.cgColor]
         }
     }
-} 
+}
