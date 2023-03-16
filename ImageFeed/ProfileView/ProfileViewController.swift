@@ -1,39 +1,46 @@
 import UIKit
 
-extension UIView {
-    func setupView(_ view: UIView) {
-        addSubview(view)
-        view.translatesAutoresizingMaskIntoConstraints = false
-    }
-}
-
 final class ProfileViewController: UIViewController {
     
-    let avatarTemp = UIImageView()
-    let profileName = UILabel()
-    let profileTag = UILabel()
-    let profileInfo = UILabel()
-    let logoutButton = UIButton()
-    
-    private func configure() {
-        view.backgroundColor = Res.Colors.backgroundColor
-        
+    private lazy var avatarTemp: UIImageView = {
+        let avatarTemp = UIImageView()
         avatarTemp.image = Res.Images.Profile.tempAvatar
-        
+        return avatarTemp
+    } ()
+    
+    private lazy var profileName: UILabel = {
+        let profileName = UILabel()
         profileName.font = UIFont.systemFont(ofSize: 21, weight: .bold)
         profileName.textColor = .white
         profileName.text = "Екатерина Новикова"
-        
+        return profileName
+    } ()
+    
+    private lazy var profileTag: UILabel = {
+        let profileTag = UILabel()
         profileTag.font = UIFont.systemFont(ofSize: 13)
         profileTag.textColor = Res.Colors.tagColor
         profileTag.text = "@ekaterina_nov"
-        
+        return profileTag
+    } ()
+    
+    private lazy var profileInfo: UILabel = {
+        let profileInfo = UILabel()
         profileInfo.font = UIFont.systemFont(ofSize: 13)
         profileInfo.textColor = .white
         profileInfo.text = "Hello, world!"
-        
-        logoutButton.setImage(Res.Images.Profile.logoutButton, for: .normal)
-    }
+        return profileInfo
+    } ()
+    
+    private lazy var logoutButton: UIButton = {
+        let logoutButton = UIButton.systemButton(
+            with: Res.Images.Profile.logoutButton ?? UIImage(),
+            target: ProfileViewController.self,
+            action: #selector(Self.didTapButton)
+        )
+        logoutButton.tintColor = Res.Colors.buttonColor
+        return logoutButton
+    } ()
     
     private func addViews() {
         [avatarTemp,
@@ -43,29 +50,37 @@ final class ProfileViewController: UIViewController {
          logoutButton].map{self.view.setupView($0)}
     }
     
+    private func applyConstraints() {
+        NSLayoutConstraint.activate([
+            avatarTemp.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
+            avatarTemp.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            avatarTemp.heightAnchor.constraint(equalToConstant: 70),
+            avatarTemp.widthAnchor.constraint(equalToConstant: 70),
+            
+            profileName.topAnchor.constraint(equalTo: avatarTemp.bottomAnchor, constant: 8),
+            profileName.leadingAnchor.constraint(equalTo: avatarTemp.leadingAnchor),
+            profileName.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 16),
+            
+            profileTag.topAnchor.constraint(equalTo: profileName.bottomAnchor, constant: 8),
+            profileTag.leadingAnchor.constraint(equalTo: profileName.leadingAnchor),
+            profileTag.trailingAnchor.constraint(equalTo: profileName.trailingAnchor),
+            
+            profileInfo.topAnchor.constraint(equalTo: profileTag.bottomAnchor, constant: 8),
+            profileInfo.leadingAnchor.constraint(equalTo: profileName.leadingAnchor),
+            profileInfo.trailingAnchor.constraint(equalTo: profileName.trailingAnchor),
+            
+            logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            logoutButton.centerYAnchor.constraint(equalTo: avatarTemp.centerYAnchor),
+        ])
+    }
+    
+    @objc func didTapButton(){
+        
+    }
+    
     override func viewDidLoad() {
-        configure()
+        view.backgroundColor = Res.Colors.backgroundColor
         addViews()
-        
-        avatarTemp.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32).isActive = true
-        avatarTemp.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
-        avatarTemp.heightAnchor.constraint(equalToConstant: 70).isActive = true
-        avatarTemp.widthAnchor.constraint(equalToConstant: 70).isActive = true
-        
-        profileName.topAnchor.constraint(equalTo: avatarTemp.bottomAnchor, constant: 8).isActive = true
-        profileName.leadingAnchor.constraint(equalTo: avatarTemp.leadingAnchor).isActive = true
-        profileName.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 16).isActive = true
-        
-        profileTag.topAnchor.constraint(equalTo: profileName.bottomAnchor, constant: 8).isActive = true
-        profileTag.leadingAnchor.constraint(equalTo: profileName.leadingAnchor).isActive = true
-        profileTag.trailingAnchor.constraint(equalTo: profileName.trailingAnchor).isActive = true
-        
-        profileInfo.topAnchor.constraint(equalTo: profileTag.bottomAnchor, constant: 8).isActive = true
-        profileInfo.leadingAnchor.constraint(equalTo: profileName.leadingAnchor).isActive = true
-        profileInfo.trailingAnchor.constraint(equalTo: profileName.trailingAnchor).isActive = true
-        
-        logoutButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 55).isActive = true
-        logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
-        logoutButton.leadingAnchor.constraint(greaterThanOrEqualTo: avatarTemp.leadingAnchor, constant: 0).isActive = true
+        applyConstraints()
     }
 }

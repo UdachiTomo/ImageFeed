@@ -1,11 +1,5 @@
 import UIKit
 
-extension SingleImageViewController: UIScrollViewDelegate {
-    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        imageView
-    }
-}
-
 final class SingleImageViewController: UIViewController {
     var image: UIImage! {
         didSet {
@@ -15,13 +9,13 @@ final class SingleImageViewController: UIViewController {
         }
     }
     
-    @IBOutlet var imageView: UIImageView!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBAction func didTapBackButton(_ sender: UIButton) {
+    @IBOutlet private var imageView: UIImageView!
+    @IBOutlet private weak var scrollView: UIScrollView!
+    @IBAction private func didTapBackButton(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func didTapShareButton(_ sender: UIButton) {
+    @IBAction private func didTapShareButton(_ sender: UIButton) {
         let share  = UIActivityViewController(activityItems: [image as Any],
                                               applicationActivities: nil
         )
@@ -50,5 +44,11 @@ final class SingleImageViewController: UIViewController {
         rescaleAndeCenterImageScrollView(image: image)
         scrollView.minimumZoomScale = 0.1
         scrollView.maximumZoomScale = 1.25
+    }
+}
+
+extension SingleImageViewController: UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        imageView
     }
 }

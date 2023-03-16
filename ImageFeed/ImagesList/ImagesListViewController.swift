@@ -1,5 +1,38 @@
 import UIKit
 
+final class ImagesListViewController: UIViewController  {
+    private let ShowSingleImageSegueIdentifier = "ShowSingleImage"
+    @IBOutlet private var tableView: UITableView!
+    
+    private let photosName: [String] = Array(0..<20).map{"\($0)"}
+    
+    private lazy var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.timeStyle = .none
+        return formatter
+    }()
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == ShowSingleImageSegueIdentifier {
+            guard let viewController = segue.destination as? SingleImageViewController else { return }
+            guard let indexPath = sender as? IndexPath else { return }
+            let image = photosName[indexPath.row]
+            let fullImage = UIImage(named: "\(image)_full_size") ?? UIImage(named: image)
+            viewController.image = fullImage
+        } else {
+            super.prepare(for: segue, sender: sender)
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+}
+
 extension ImagesListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -49,37 +82,3 @@ extension ImagesListViewController {
         cell.likeCell.setImage(likeImage, for: .normal)
     }
 }
-
-final class ImagesListViewController: UIViewController  {
-    private let ShowSingleImageSegueIdentifier = "ShowSingleImage"
-    @IBOutlet private var tableView: UITableView!
-    
-    private let photosName: [String] = Array(0..<20).map{"\($0)"}
-    
-    private lazy var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .none
-        return formatter
-    }()
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == ShowSingleImageSegueIdentifier {
-            let viewController = segue.destination as! SingleImageViewController
-            let indexPath = sender as! IndexPath
-            let image = photosName[indexPath.row]
-            let fullImage = UIImage(named: "\(image)_full_size") ?? UIImage(named: image)
-            viewController.image = fullImage
-        } else {
-            super.prepare(for: segue, sender: sender)
-        }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
-        tableView.delegate = self
-        tableView.dataSource = self
-    }
-}
-
