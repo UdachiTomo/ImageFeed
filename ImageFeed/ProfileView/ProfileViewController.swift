@@ -74,7 +74,7 @@ final class ProfileViewController: UIViewController {
         ])
     }
     
-    @objc func didTapButton(){
+    @objc private func didTapButton(){
         
     }
     
