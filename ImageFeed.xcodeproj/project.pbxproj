@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		CE13EFCA29C35129001E3E76 /* Extension UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13EFC929C35129001E3E76 /* Extension UIView.swift */; };
+		CE13EFCD29C88B15001E3E76 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13EFCC29C88B15001E3E76 /* Constants.swift */; };
+		CE13EFD029C8A148001E3E76 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13EFCF29C8A148001E3E76 /* AuthViewController.swift */; };
+		CE13EFD229C8A2BE001E3E76 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13EFD129C8A2BE001E3E76 /* WebViewViewController.swift */; };
+		CE13EFD429CC6F72001E3E76 /* WebViewViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13EFD329CC6F72001E3E76 /* WebViewViewControllerDelegate.swift */; };
+		CE13EFD629CC976C001E3E76 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13EFD529CC976C001E3E76 /* NetworkClient.swift */; };
+		CE13EFD829CCA92B001E3E76 /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13EFD729CCA92B001E3E76 /* TokenStorage.swift */; };
+		CE13EFDA29CCAFEF001E3E76 /* OAuthTokenResponseBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13EFD929CCAFEF001E3E76 /* OAuthTokenResponseBody.swift */; };
 		CE4945F629A650EA001CE1B4 /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4945F529A650EA001CE1B4 /* ImagesListCell.swift */; };
 		CE4945F929A67F85001CE1B4 /* GradientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4945F829A67F85001CE1B4 /* GradientCell.swift */; };
 		CE70F96229A122FF00716648 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE70F96129A122FF00716648 /* AppDelegate.swift */; };
@@ -24,6 +31,13 @@
 
 /* Begin PBXFileReference section */
 		CE13EFC929C35129001E3E76 /* Extension UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension UIView.swift"; sourceTree = "<group>"; };
+		CE13EFCC29C88B15001E3E76 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		CE13EFCF29C8A148001E3E76 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		CE13EFD129C8A2BE001E3E76 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
+		CE13EFD329CC6F72001E3E76 /* WebViewViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewControllerDelegate.swift; sourceTree = "<group>"; };
+		CE13EFD529CC976C001E3E76 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
+		CE13EFD729CCA92B001E3E76 /* TokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenStorage.swift; sourceTree = "<group>"; };
+		CE13EFD929CCAFEF001E3E76 /* OAuthTokenResponseBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthTokenResponseBody.swift; sourceTree = "<group>"; };
 		CE4945F529A650EA001CE1B4 /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		CE4945F829A67F85001CE1B4 /* GradientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientCell.swift; sourceTree = "<group>"; };
 		CE70F95E29A122FF00716648 /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,6 +65,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE13EFCB29C88AF4001E3E76 /* Unsplash API */ = {
+			isa = PBXGroup;
+			children = (
+				CE13EFCC29C88B15001E3E76 /* Constants.swift */,
+				CE13EFD529CC976C001E3E76 /* NetworkClient.swift */,
+				CE13EFD729CCA92B001E3E76 /* TokenStorage.swift */,
+				CE13EFD929CCAFEF001E3E76 /* OAuthTokenResponseBody.swift */,
+			);
+			path = "Unsplash API";
+			sourceTree = "<group>";
+		};
+		CE13EFCE29C8A122001E3E76 /* AuthView */ = {
+			isa = PBXGroup;
+			children = (
+				CE13EFCF29C8A148001E3E76 /* AuthViewController.swift */,
+				CE13EFD129C8A2BE001E3E76 /* WebViewViewController.swift */,
+				CE13EFD329CC6F72001E3E76 /* WebViewViewControllerDelegate.swift */,
+			);
+			path = AuthView;
+			sourceTree = "<group>";
+		};
 		CE4945F729A65131001CE1B4 /* ImagesList */ = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +131,8 @@
 		CE70F96029A122FF00716648 /* ImageFeed */ = {
 			isa = PBXGroup;
 			children = (
+				CE13EFCE29C8A122001E3E76 /* AuthView */,
+				CE13EFCB29C88AF4001E3E76 /* Unsplash API */,
 				CECE56E429BE1B97000B34E2 /* Helpers */,
 				CE4945F729A65131001CE1B4 /* ImagesList */,
 				CE6C46EA29B73D3800B88608 /* SingleImageView */,
@@ -192,12 +229,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				CED4F7AB29B6105F00807B78 /* ProfileViewController.swift in Sources */,
+				CE13EFCD29C88B15001E3E76 /* Constants.swift in Sources */,
 				CE70F96629A122FF00716648 /* ImagesListViewController.swift in Sources */,
 				CE4945F929A67F85001CE1B4 /* GradientCell.swift in Sources */,
+				CE13EFD029C8A148001E3E76 /* AuthViewController.swift in Sources */,
+				CE13EFDA29CCAFEF001E3E76 /* OAuthTokenResponseBody.swift in Sources */,
+				CE13EFD429CC6F72001E3E76 /* WebViewViewControllerDelegate.swift in Sources */,
 				CE13EFCA29C35129001E3E76 /* Extension UIView.swift in Sources */,
 				CECE56E329BE18D2000B34E2 /* Resourses.swift in Sources */,
 				CECE56E629BE1BAB000B34E2 /* UIColor.swift in Sources */,
+				CE13EFD229C8A2BE001E3E76 /* WebViewViewController.swift in Sources */,
 				CE748DED29B6428600C98A6A /* SingleImageViewController.swift in Sources */,
+				CE13EFD629CC976C001E3E76 /* NetworkClient.swift in Sources */,
+				CE13EFD829CCA92B001E3E76 /* TokenStorage.swift in Sources */,
 				CE4945F629A650EA001CE1B4 /* ImagesListCell.swift in Sources */,
 				CE70F96229A122FF00716648 /* AppDelegate.swift in Sources */,
 				CE70F96429A122FF00716648 /* SceneDelegate.swift in Sources */,
