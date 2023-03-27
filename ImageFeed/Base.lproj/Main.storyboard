@@ -55,7 +55,7 @@
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="vw5-58-yXO"/>
                                                     </constraints>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" image="active"/>
+                                                    <state key="normal" image="Activeee"/>
                                                 </button>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AwK-1P-BK1" customClass="GradientCell" customModule="ImageFeed" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="155" width="382" height="30"/>
@@ -155,7 +155,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cqB-PR-cmC">
                                         <rect key="frame" x="181.5" y="776" width="51" height="50"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="sharing"/>
+                                        <state key="normal" image="Sharinggggg"/>
                                         <connections>
                                             <action selector="didTapShareButton:" destination="777-58-rV8" eventType="touchUpInside" id="u9k-7q-Zbr"/>
                                         </connections>
@@ -260,9 +260,9 @@
     </scenes>
     <resources>
         <image name="0" width="200" height="132"/>
-        <image name="active" width="42" height="42"/>
+        <image name="Activeee" width="42" height="42"/>
+        <image name="Sharinggggg" width="51" height="50"/>
         <image name="chevron.backward" width="9" height="16"/>
-        <image name="sharing" width="51" height="50"/>
         <image name="tab_editorial_active" width="20" height="22"/>
         <image name="tab_profile_active" width="24" height="24"/>
     </resources>
