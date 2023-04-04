@@ -1,17 +1,16 @@
 import UIKit
 
-class OAuth2Service {
+final class OAuth2Service {
+    
     static let shared = OAuth2Service()
-
     private let urlSession = URLSession.shared
 
     private (set) var authToken: String? {
         get {
-            return OAuth2TokenStorage.token
-
+            return OAuth2TokenStorage().token
         }
         set {
-            OAuth2TokenStorage.token = newValue ?? ""
+            OAuth2TokenStorage().token = newValue
         }
     }
 
@@ -23,7 +22,6 @@ class OAuth2Service {
             case .success(let body):
                 let authToken = body.accessToken
                 self.authToken = authToken
-                print(authToken)
                 completion(.success(authToken))
             case .failure(let error):
                 completion(.failure(error))
@@ -65,22 +63,22 @@ extension URLRequest {
     static func makeHTTPRequest(
         path: String,
         httpMethod: String,
-        baseURL: URL = Constants.defaultBaseURL!
+        baseURL: URL = Constants.defaultBaseURL
     ) -> URLRequest {
         var request = URLRequest(url: URL(string: path, relativeTo: baseURL)!)
         request.httpMethod = httpMethod
-        print(httpMethod)
         return request
     }
 }
 
-enum NetworkError: Error {
-    case httpStatusCode(Int)
-    case urlRequestError(Error)
-    case urlSessionError
-}
-
 extension URLSession {
+    
+    enum NetworkError: Error {
+        case httpStatusCode(Int)
+        case urlRequestError(Error)
+        case urlSessionError
+    }
+    
     func data(
         for request: URLRequest,
         comletion: @escaping (Result<Data, Error>) -> Void
@@ -97,22 +95,14 @@ extension URLSession {
                let statusCode = (response as? HTTPURLResponse)?.statusCode
             {
                 if 200 ..< 300 ~= statusCode {
-                    DispatchQueue.main.async {
                         fulfillCompletion(.success(data))
-                    }
                 } else {
-                    DispatchQueue.main.async {
                         fulfillCompletion(.failure(NetworkError.httpStatusCode(statusCode)))
-                    }
                 }
-            }   else if let error = error {
-                DispatchQueue.main.async {
+            } else if let error = error {
                     fulfillCompletion(.failure(NetworkError.urlRequestError(error)))
-                }
-            }   else {
-                DispatchQueue.main.async {
+            } else {
                     fulfillCompletion(.failure(NetworkError.urlSessionError))
-                }
             }
         })
         task.resume()

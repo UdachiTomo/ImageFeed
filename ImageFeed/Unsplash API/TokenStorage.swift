@@ -1,14 +1,24 @@
 import UIKit
 
 class OAuth2TokenStorage {
-    static private let bearerToken = "Token"
-    static var token: String? {
-        get {
-            return UserDefaults.standard.string(forKey: bearerToken)
-        }
+    var bearerToken = "Token"
+    
+    //    var token: String? {
+    //        get {
+    //            UserDefaults.standard.string(forKey: bearerToken)
+    //        }
+    //        set {
+    //            return UserDefaults.standard.set(newValue, forKey: bearerToken)
+    //            }
+    //        }
+    //    }
+    
+    var token: String? {
         set {
-            UserDefaults.standard.set(newValue, forKey: bearerToken)
+            return UserDefaults.standard.set(newValue, forKey: bearerToken)
+        }
+        get {
+            UserDefaults.standard.string(forKey: bearerToken)
         }
     }
-
 }
