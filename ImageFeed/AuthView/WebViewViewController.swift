@@ -33,7 +33,7 @@ final class WebViewViewController: UIViewController {
             URLQueryItem(name: "scope", value: Constants.accessScope)
         ]
         
-        let url = urlComponents.url!
+        guard let url = urlComponents.url else { return }
         let request = URLRequest(url: url)
         webView.load(request)
         updateProgress()
@@ -83,15 +83,8 @@ extension WebViewViewController: WKNavigationDelegate {
             let items = urlComponents.queryItems,
             let codeItem = items.first(where: { $0.name == "code" })
         {
-            print(url)
-            print(urlComponents)
-            print(urlComponents.path)
-            print(items)
-            print(codeItem)
-            print(codeItem.value as Any)
             return codeItem.value
         } else {
-            print("Nothing")
             return nil
         }
     }
