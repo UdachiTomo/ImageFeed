@@ -8,7 +8,7 @@ protocol WebViewViewControllerDelegate: AnyObject {
 
 final class WebViewViewController: UIViewController {
    
-    @IBOutlet private var webView: WKWebView!
+    @IBOutlet private weak var webView: WKWebView!
     
     @IBAction private func didTapButton(_ sender: Any?) {
         delegate?.webViewViewControllerDidCancel(self)
