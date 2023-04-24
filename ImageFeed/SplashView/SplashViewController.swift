@@ -38,6 +38,7 @@ final class SplashViewController: UIViewController {
             }
         }
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
@@ -66,7 +67,6 @@ final class SplashViewController: UIViewController {
     }
     
     private func addViews() {
-        //screenLogo.setupView(view)
         view.addSubview(screenLogo)
     }
     
@@ -79,23 +79,6 @@ final class SplashViewController: UIViewController {
         ])
     }
 }
-
-//extension SplashViewController {
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == showAuthenticationScreenSegueIdentifier {
-//            guard
-//                let navigationController = segue.destination as? UINavigationController,
-//                let viewController = navigationController.viewControllers[0] as? AuthViewController
-//            else {
-//                assert(false)
-//                assertionFailure("Failed to prepare for \(showAuthenticationScreenSegueIdentifier)")
-//            }
-//            viewController.delegate = self
-//        } else {
-//            super.prepare(for: segue, sender: sender)
-//        }
-//    }
-//}
 
 extension SplashViewController: AuthViewControllerDelegate {
     func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
@@ -112,7 +95,6 @@ extension SplashViewController: AuthViewControllerDelegate {
             switch result {
             case .success(let token):
                 self.fetchProfile(token: token)
-                self.switchToTabBarController()
             case .failure:
                 self.showAlert()
                 UIBlockingProgressHUD.dismiss()
@@ -128,8 +110,9 @@ extension SplashViewController: AuthViewControllerDelegate {
                 self.profileImageService.fetchProfileImageURL(token, username: userProfile.username) { _ in }
                 self.switchToTabBarController()
             case .failure:
-                UIBlockingProgressHUD.dismiss()
+                break
             }
+            UIBlockingProgressHUD.dismiss()
         }
     }
 }

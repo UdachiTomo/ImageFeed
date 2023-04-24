@@ -32,7 +32,6 @@ final class ProfileImageService {
             switch result {
             case .success(let userResult):
                 let smallSizeProfileImage = userResult.profileImage?.small
-                print(smallSizeProfileImage ?? "Ничего")
                 self.avatarURL = smallSizeProfileImage
                 completion(.success(self.avatarURL))
                 NotificationCenter.default
@@ -52,7 +51,7 @@ final class ProfileImageService {
        var request = URLRequest.makeHTTPRequest(
             path: "/users/\(username)",
             httpMethod: "GET",
-            baseURL: URL(string: "https://api.unsplash.com")!
+            baseURL: Constants.defaultBaseURL
         )
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         return request
