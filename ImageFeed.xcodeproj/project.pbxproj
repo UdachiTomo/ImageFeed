@@ -21,6 +21,7 @@
 		CE3B9E4529EC4927003FD536 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = CE3B9E4429EC4927003FD536 /* Kingfisher */; };
 		CE3B9E4829EC57CF003FD536 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = CE3B9E4729EC57CF003FD536 /* SwiftKeychainWrapper */; };
 		CE3B9E4B29ED72B2003FD536 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3B9E4A29ED72B2003FD536 /* TabBarController.swift */; };
+		CE3B9E4D29F2C82A003FD536 /* ImagesListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3B9E4C29F2C82A003FD536 /* ImagesListService.swift */; };
 		CE4945F629A650EA001CE1B4 /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4945F529A650EA001CE1B4 /* ImagesListCell.swift */; };
 		CE4945F929A67F85001CE1B4 /* GradientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4945F829A67F85001CE1B4 /* GradientCell.swift */; };
 		CE70F96229A122FF00716648 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE70F96129A122FF00716648 /* AppDelegate.swift */; };
@@ -50,6 +51,7 @@
 		CE3B9E3F29E1A2D0003FD536 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		CE3B9E4129E2FD82003FD536 /* ProfileImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageService.swift; sourceTree = "<group>"; };
 		CE3B9E4A29ED72B2003FD536 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		CE3B9E4C29F2C82A003FD536 /* ImagesListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListService.swift; sourceTree = "<group>"; };
 		CE4945F529A650EA001CE1B4 /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		CE4945F829A67F85001CE1B4 /* GradientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientCell.swift; sourceTree = "<group>"; };
 		CE70F95E29A122FF00716648 /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,7 +116,7 @@
 			children = (
 				CE70F96529A122FF00716648 /* ImagesListViewController.swift */,
 				CE4945F529A650EA001CE1B4 /* ImagesListCell.swift */,
-				CE4945F829A67F85001CE1B4 /* GradientCell.swift */,
+				CE3B9E4C29F2C82A003FD536 /* ImagesListService.swift */,
 			);
 			path = ImagesList;
 			sourceTree = "<group>";
@@ -179,6 +181,7 @@
 			children = (
 				CECE56E229BE18D2000B34E2 /* Resourses.swift */,
 				CECE56E529BE1BAB000B34E2 /* UIColor.swift */,
+				CE4945F829A67F85001CE1B4 /* GradientCell.swift */,
 				CE13EFC929C35129001E3E76 /* Extension UIView.swift */,
 				CE3B9E3B29E1957D003FD536 /* Extension NetworkClient.swift */,
 				CE3B9E3D29E19E92003FD536 /* UIBlockingProgressHUD.swift */,
@@ -276,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE3B9E3C29E1957D003FD536 /* Extension NetworkClient.swift in Sources */,
+				CE3B9E4D29F2C82A003FD536 /* ImagesListService.swift in Sources */,
 				CED4F7AB29B6105F00807B78 /* ProfileViewController.swift in Sources */,
 				CE13EFCD29C88B15001E3E76 /* Constants.swift in Sources */,
 				CE70F96629A122FF00716648 /* ImagesListViewController.swift in Sources */,
