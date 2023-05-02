@@ -61,5 +61,12 @@ final class ProfileService {
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         return request
     }
+    
+    func cleanSession() { 
+        task?.cancel()
+        self.task = nil
+        OAuth2TokenStorage.token = nil
+        profile = nil
+    }
 }
 
