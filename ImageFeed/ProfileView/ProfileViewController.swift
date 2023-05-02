@@ -9,6 +9,9 @@ final class ProfileViewController: UIViewController {
     
     private lazy var avatarView: UIImageView = {
         let avatarView = UIImageView()
+        avatarView.contentMode = .scaleAspectFit
+        avatarView.layer.cornerRadius = 35
+        avatarView.clipsToBounds = true
         return avatarView
     } ()
     
