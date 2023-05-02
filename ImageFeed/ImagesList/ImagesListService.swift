@@ -12,10 +12,8 @@ final class ImagesListService {
     
     func fetchPhotosNextPage() {
         assert(Thread.isMainThread)
-        task?.cancel()
-        let nextPage = lastLoadedPage == nil
-        ? 1
-        : lastLoadedPage! + 1
+        guard task == nil else { return }
+        let nextPage = lastLoadedPage == nil ? 1 : lastLoadedPage! + 1
         guard let token = OAuth2TokenStorage.token else { return }
         guard let request = fetchImageListRequest(token, page: String(nextPage), perPage: perPage) else { return }
         let task = URLSession.shared.object(for: request) { [weak self] (result: Result<[PhotoResult], Error>) in

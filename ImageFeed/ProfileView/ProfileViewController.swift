@@ -69,9 +69,9 @@ final class ProfileViewController: UIViewController {
     
     private func updateProfileDetails() {
         guard let profile = profileService.profile else { return }
-        profileName.text = profileService.profile?.name
-        profileTag.text = profileService.profile?.loginName
-        profileInfo.text = profileService.profile?.bio
+        profileName.text = profile.name
+        profileTag.text = profile.loginName
+        profileInfo.text = profile.bio
     }
     
     private func updateAvatar() {
@@ -98,7 +98,7 @@ final class ProfileViewController: UIViewController {
          profileName,
          profileTag,
          profileInfo,
-         logoutButton].map{self.view.setupView($0)}
+         logoutButton].forEach(view.setupView(_:))
     }
     
     private func applyConstraints() {

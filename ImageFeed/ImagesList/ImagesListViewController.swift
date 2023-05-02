@@ -119,7 +119,7 @@ extension ImagesListViewController {
             if let date = imagesListService.photos[indexPath.row].createdAt {
                 cell.dateCell.text = dateFormatter.string(from: date)
             } else {
-                cell.dateCell.text = "Дата фотографии недоступна"
+                cell.dateCell.text = ""
             }
             let isLiked = imagesListService.photos[indexPath.row].isLiked == false
             let likedImage = isLiked ? UIImage(named: "no_active_photo") : UIImage(named: "active_photo")
