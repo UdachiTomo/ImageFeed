@@ -63,7 +63,6 @@ final class SingleImageViewController: UIViewController {
             guard let self = self else { return }
             switch result {
             case .success(let imageResult):
-                self.imageView.image = imageResult.image
                 self.rescaleAndCenterImageScrollView(image: imageResult.image)
             case .failure:
                 self.showError()

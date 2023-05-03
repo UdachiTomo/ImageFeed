@@ -9,7 +9,7 @@ final class ProfileViewController: UIViewController {
     
     private lazy var avatarView: UIImageView = {
         let avatarView = UIImageView()
-        avatarView.contentMode = .scaleAspectFit
+        avatarView.contentMode = .scaleAspectFill
         avatarView.layer.cornerRadius = 35
         avatarView.clipsToBounds = true
         return avatarView
@@ -193,7 +193,6 @@ final class ProfileViewController: UIViewController {
             ) { [weak self]  _ in
                 guard let self = self else { return }
                 self.updateAvatar()
-        }
-        updateAvatar()
+        } 
     }
 }
