@@ -4,7 +4,6 @@ import WebKit
 
 protocol ProfileViewViewControllerProtocol: AnyObject {
     var presenter: ProfilePresenterProtocol? { get set }
-    func switchToSplashViewController()
     func updateAvatar()
 }
 
@@ -122,34 +121,10 @@ final class ProfileViewController: UIViewController, ProfileViewViewControllerPr
         showAlert()
     }
     
-    static func cleanSession() {
-       HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
-       WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
-          records.forEach { record in
-             WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
-          }
-       }
-    }
-    
-    private func cleanAllService() {
-        ProfileService.shared.cleanSession()
-        ProfileImageService.shared.cleanSession()
-        ImagesListService.shared.cleanSession()
-        ProfileViewController.cleanSession()
-    }
-    
     private func logOut() {
-        cleanAllService()
-        switchToSplashViewController()
+        presenter?.logOut()
     }
     
-     func switchToSplashViewController() {
-        guard let window = UIApplication.shared.windows.first else {
-            assertionFailure("Invalid Configuration")
-            return
-        }
-        window.rootViewController = SplashViewController()
-    }
     
     private func showAlert() {
         let alertController = UIAlertController(title: "Выход",
@@ -162,13 +137,7 @@ final class ProfileViewController: UIViewController, ProfileViewViewControllerPr
         alertController.addAction(UIAlertAction(title: "Нет", style: .default))
         present(alertController, animated: true)
     }
-    
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        updateProfileDetails()
-//        updateAvatar()
-//    }
-    
+ 
     override func viewDidLoad() {
         view.backgroundColor = Res.Colors.backgroundColor
         addViews()
@@ -184,6 +153,5 @@ final class ProfileViewController: UIViewController, ProfileViewViewControllerPr
                 guard let self = self else { return }
                 self.updateAvatar()
         }
-        
     }
 }
