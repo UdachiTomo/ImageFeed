@@ -45,7 +45,7 @@ final class ProfileImageService {
             }
         }
         self.task = task
-        task.resume()
+        task?.resume()
     }
     
     private func fetchProfileImageRequest(_ token: String, username: String) -> URLRequest? {

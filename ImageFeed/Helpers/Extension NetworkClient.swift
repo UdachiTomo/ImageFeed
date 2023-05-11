@@ -4,7 +4,7 @@ extension URLSession {
         func object<T: Decodable>(
         for reguest: URLRequest,
         comletion: @escaping (Result<T, Error>) -> Void
-    ) -> URLSessionTask {
+    ) -> URLSessionTask? {
         let decoder = JSONDecoder()
         let task = URLSession.shared.data (for: reguest) { (result: Result<Data, Error>) in
             let response = result.flatMap { data -> Result<T, Error> in

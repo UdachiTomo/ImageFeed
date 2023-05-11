@@ -45,7 +45,7 @@ final class ImagesListService {
             }
         }
         self.task = task
-        task.resume()
+        task?.resume()
     }
     
     func changeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Void, Error>) -> Void) {
@@ -84,7 +84,7 @@ final class ImagesListService {
             }
         }
         self.task = task
-        task.resume()
+        task?.resume()
     }
     
     private func fetchImageListRequest(_ token: String, page: String, perPage: String) -> URLRequest? {
