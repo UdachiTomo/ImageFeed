@@ -5,7 +5,8 @@ final class TabBarController: UITabBarController {
         super.awakeFromNib()
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
         
-        let imageListViewController = storyboard.instantiateViewController(withIdentifier: "ImagesListViewController")
+        let imageListViewController = storyboard.instantiateViewController(withIdentifier: "ImagesListViewController") as! ImagesListViewController
+        imageListViewController.configure(ImagesListPresenter())
         
         let profileViewController = ProfileViewController()
         profileViewController.configure(ProfilePreseter())

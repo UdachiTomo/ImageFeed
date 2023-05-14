@@ -1,22 +1,27 @@
 import UIKit
 import Kingfisher
 
-final class ImagesListViewController: UIViewController {
+public protocol ImagesListViewViewControllerProtocol: AnyObject {
+    var presenter: ImagesListPresenterProtocol? { get set }
+    var photos: [Photo] { get set }
+    func updateTableViewAnimated()
+}
+
+final class ImagesListViewController: UIViewController & ImagesListViewViewControllerProtocol {
+    
+    var presenter: ImagesListPresenterProtocol?
     
     @IBOutlet private weak var tableView: UITableView!
     
     private let ShowSingleImageSegueIdentifier = "ShowSingleImage"
     private let imagesListService = ImagesListService.shared
     private var imagesListServiceObserver: NSObjectProtocol?
-    private var photos: [Photo] = []
-    
-    
-    private lazy var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .none
-        return formatter
-    }()
+    var photos: [Photo] = []
+
+    func configure(_ presenter: ImagesListPresenterProtocol) {
+        self.presenter = presenter
+        self.presenter?.view = self
+    }
     
     func updateTableViewAnimated() {
         let oldCount = photos.count
@@ -49,15 +54,8 @@ final class ImagesListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter?.viewDidLoad()
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
-        imagesListServiceObserver = NotificationCenter.default.addObserver(
-            forName: ImagesListService.didChangeNotification,
-            object: nil,
-            queue: .main
-        ) { [ weak self ] _ in
-            guard let self = self else { return }
-            self.updateTableViewAnimated()
-        }
         imagesListService.fetchPhotosNextPage()
         tableView.delegate = self
         tableView.dataSource = self
@@ -108,21 +106,20 @@ extension ImagesListViewController: UITableViewDataSource {
 
 extension ImagesListViewController {
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
-        if let url = imagesListService.photos[indexPath.row].thumbImageURL,
-           let imagesUrl = URL(string: url) {
+        if let url = presenter?.getCellURL(indexPath: indexPath) {
             cell.imageCell.kf.indicatorType = .activity
-            cell.imageCell.kf.setImage(with: imagesUrl,
+            cell.imageCell.kf.setImage(with: url,
                                        placeholder: UIImage(named: "scribble")) { [weak self] _ in
                 guard let self = self else { return }
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
             }
             if let date = imagesListService.photos[indexPath.row].createdAt {
-                cell.dateCell.text = dateFormatter.string(from: date)
+                cell.dateCell.text = presenter?.timeSetup(date)
             } else {
                 cell.dateCell.text = ""
             }
-            let isLiked = imagesListService.photos[indexPath.row].isLiked == false
-            let likedImage = isLiked ? UIImage(named: "no_active_photo") : UIImage(named: "active_photo")
+            let isLiked = presenter?.isLiked(indexPath: indexPath)
+            let likedImage = isLiked ?? true ? UIImage(named: "no_active_photo") : UIImage(named: "active_photo")
             cell.likeCell.setImage(likedImage, for: .normal)
             cell.selectionStyle = .none
         }
@@ -132,18 +129,7 @@ extension ImagesListViewController {
 extension ImagesListViewController: ImagesListCellDelegate {
     func imageListCellDidTapLike(_ cell: ImagesListCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
-        let photo = photos[indexPath.row]
-        UIBlockingProgressHUD.show()
-        imagesListService.changeLike(photoId: photo.id, isLike: photo.isLiked) { result in
-            switch result {
-            case .success:
-                self.photos = self.imagesListService.photos
-                cell.setIsLiked(isLiked: self.photos[indexPath.row].isLiked)
-                UIBlockingProgressHUD.dismiss()
-            case .failure:
-                UIBlockingProgressHUD.dismiss()
-            }
-        }
+        presenter?.imageListCellDidTapLike(cell, indexPath: indexPath)
     }
 }
 

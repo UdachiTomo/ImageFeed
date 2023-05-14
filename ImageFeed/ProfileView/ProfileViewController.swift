@@ -1,6 +1,6 @@
 import UIKit
 import Kingfisher
-import WebKit
+
 
 protocol ProfileViewViewControllerProtocol: AnyObject {
     var presenter: ProfilePresenterProtocol? { get set }
@@ -9,8 +9,6 @@ protocol ProfileViewViewControllerProtocol: AnyObject {
 
 final class ProfileViewController: UIViewController, ProfileViewViewControllerProtocol {
     var presenter: ProfilePresenterProtocol?
-    private let profileService = ProfileService.shared
-    private var profileImageServiceObserver: NSObjectProtocol?
     
     private lazy var avatarView: UIImageView = {
         let avatarView = UIImageView()
@@ -145,13 +143,5 @@ final class ProfileViewController: UIViewController, ProfileViewViewControllerPr
         updateProfileDetails()
         updateAvatar()
         presenter?.view = self
-        profileImageServiceObserver = NotificationCenter.default
-            .addObserver(forName: ProfileImageService.DidChangeNotification,
-                         object: nil,
-                         queue: .main
-            ) { [weak self]  _ in
-                guard let self = self else { return }
-                self.updateAvatar()
-        }
     }
 }

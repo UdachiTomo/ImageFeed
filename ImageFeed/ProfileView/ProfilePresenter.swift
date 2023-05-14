@@ -12,7 +12,8 @@ protocol ProfilePresenterProtocol {
 
 final class ProfilePreseter: ProfilePresenterProtocol {
     weak var view: ProfileViewViewControllerProtocol?
-    var profileService = ProfileService.shared
+    private var profileService = ProfileService.shared
+    private var profileImageServiceObserver: NSObjectProtocol?
     
     func switchToSplashViewController() {
        guard let window = UIApplication.shared.windows.first else {
@@ -44,8 +45,19 @@ final class ProfilePreseter: ProfilePresenterProtocol {
         ProfileService.shared.cleanSession()
         ProfileImageService.shared.cleanSession()
         ImagesListService.shared.cleanSession()
-        OAuth2TokenStorage.token = nil
+        OAuth2TokenStorage.token?.removeAll()
         self.switchToSplashViewController()
+    }
+    
+    func viewDidLoad() {
+        profileImageServiceObserver = NotificationCenter.default
+            .addObserver(forName: ProfileImageService.DidChangeNotification,
+                         object: nil,
+                         queue: .main
+            ) { [weak self]  _ in
+                guard let self = self else { return }
+                self.view?.updateAvatar()
+        }
     }
     
     static func cleanSession() {
