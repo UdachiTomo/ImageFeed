@@ -15,7 +15,6 @@ final class ImagesListViewController: UIViewController & ImagesListViewViewContr
     
     private let ShowSingleImageSegueIdentifier = "ShowSingleImage"
     private let imagesListService = ImagesListService.shared
-    private var imagesListServiceObserver: NSObjectProtocol?
     var photos: [Photo] = []
 
     func configure(_ presenter: ImagesListPresenterProtocol) {
@@ -42,10 +41,9 @@ final class ImagesListViewController: UIViewController & ImagesListViewViewContr
         if segue.identifier == ShowSingleImageSegueIdentifier {
             guard let viewController = segue.destination as? SingleImageViewController else { return }
             guard let indexPath = sender as? IndexPath else { return }
-            if let url = imagesListService.photos[indexPath.row].largeImageURL,
-               let imageUrl = URL(string: url) {
+            let url = presenter?.getCellURL(indexPath: indexPath)
+            if let imageUrl = url?.largeUrl {
                 viewController.singleImageURL = imageUrl
-                
             }
         } else {
             super.prepare(for: segue, sender: sender)
@@ -82,7 +80,7 @@ extension ImagesListViewController: UITableViewDelegate {
 extension ImagesListViewController: UITableViewDataSource {
     
     func tableView( _ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return imagesListService.photos.count
+        return presenter?.view?.photos.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -108,12 +106,12 @@ extension ImagesListViewController {
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         if let url = presenter?.getCellURL(indexPath: indexPath) {
             cell.imageCell.kf.indicatorType = .activity
-            cell.imageCell.kf.setImage(with: url,
+            cell.imageCell.kf.setImage(with: url.thumbUrl,
                                        placeholder: UIImage(named: "scribble")) { [weak self] _ in
                 guard let self = self else { return }
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
             }
-            if let date = imagesListService.photos[indexPath.row].createdAt {
+            if let date = presenter?.getDateCell(indexPath: indexPath) {
                 cell.dateCell.text = presenter?.timeSetup(date)
             } else {
                 cell.dateCell.text = ""

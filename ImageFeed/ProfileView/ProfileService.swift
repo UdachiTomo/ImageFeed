@@ -1,5 +1,9 @@
 import UIKit
 
+protocol ProfileServiceProtocol {
+    var profileService: ProfileService { get }
+}
+
 final class ProfileService {
     
     static let shared = ProfileService()

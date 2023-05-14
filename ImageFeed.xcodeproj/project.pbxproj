@@ -42,6 +42,7 @@
 		CE70F96E29A1230000716648 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE70F96C29A1230000716648 /* LaunchScreen.storyboard */; };
 		CE748DED29B6428600C98A6A /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE748DEC29B6428600C98A6A /* SingleImageViewController.swift */; };
 		CEBC77C82A11111A0006F096 /* ImagesListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC77C72A11111A0006F096 /* ImagesListPresenter.swift */; };
+		CEBC77CA2A1130A00006F096 /* AlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC77C92A1130A00006F096 /* AlertPresenter.swift */; };
 		CECE56E329BE18D2000B34E2 /* Resourses.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE56E229BE18D2000B34E2 /* Resourses.swift */; };
 		CECE56E629BE1BAB000B34E2 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE56E529BE1BAB000B34E2 /* UIColor.swift */; };
 		CED4F7AB29B6105F00807B78 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F7AA29B6105F00807B78 /* ProfileViewController.swift */; };
@@ -104,6 +105,7 @@
 		CE70F96F29A1230000716648 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE748DEC29B6428600C98A6A /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 		CEBC77C72A11111A0006F096 /* ImagesListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListPresenter.swift; sourceTree = "<group>"; };
+		CEBC77C92A1130A00006F096 /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
 		CECE56E229BE18D2000B34E2 /* Resourses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resourses.swift; sourceTree = "<group>"; };
 		CECE56E529BE1BAB000B34E2 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		CED4F7AA29B6105F00807B78 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				CE13EFC929C35129001E3E76 /* Extension UIView.swift */,
 				CE3B9E3B29E1957D003FD536 /* Extension NetworkClient.swift */,
 				CE3B9E3D29E19E92003FD536 /* UIBlockingProgressHUD.swift */,
+				CEBC77C92A1130A00006F096 /* AlertPresenter.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -470,6 +473,7 @@
 				CE3B9E5E29F6CE42003FD536 /* ImagesListModels.swift in Sources */,
 				CE3F16C72A0BE3DD004CADD2 /* WebViewViewControllerSpy.swift in Sources */,
 				CEBC77C82A11111A0006F096 /* ImagesListPresenter.swift in Sources */,
+				CEBC77CA2A1130A00006F096 /* AlertPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

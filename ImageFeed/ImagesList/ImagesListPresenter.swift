@@ -3,7 +3,8 @@ import UIKit
 public protocol ImagesListPresenterProtocol {
     var view: ImagesListViewViewControllerProtocol? { get set }
     func timeSetup(_ date: Date) -> String
-    func getCellURL(indexPath: IndexPath) -> URL?
+    func getCellURL(indexPath: IndexPath) -> (thumbUrl: URL, largeUrl: URL)?
+    func getDateCell(indexPath: IndexPath) -> Date?
     func isLiked(indexPath: IndexPath) -> Bool
     func imageListCellDidTapLike(_ cell: ImagesListCell, indexPath: IndexPath)
     func viewDidLoad()
@@ -24,13 +25,19 @@ final class ImagesListPresenter: ImagesListPresenterProtocol {
     func timeSetup(_ date: Date) -> String {
         dateFormatter.string(from: date)
     }
+   
+    func getCellURL(indexPath: IndexPath) -> (thumbUrl: URL, largeUrl: URL)? {
+        guard let imageCellThumbURL = imagesListService.photos[indexPath.row].thumbImageURL,
+              let imageCellLargeURL = imagesListService.photos[indexPath.row].largeImageURL,
+              let thumbUrl = URL(string: imageCellThumbURL),
+              let largeUrl = URL(string: imageCellLargeURL)
+        else { return nil }
+        return (thumbUrl, largeUrl)
+    }
     
-    func getCellURL(indexPath: IndexPath) -> URL? {
-        guard
-            let imageCellUrl = imagesListService.photos[indexPath.row].thumbImageURL,
-            let url = URL(string: imageCellUrl)
-        else { return nil}
-        return url
+    
+    func getDateCell(indexPath: IndexPath) -> Date? {
+        return imagesListService.photos[indexPath.row].createdAt
     }
     
     func isLiked(indexPath: IndexPath) -> Bool {
