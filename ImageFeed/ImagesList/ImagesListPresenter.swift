@@ -14,7 +14,7 @@ final class ImagesListPresenter: ImagesListPresenterProtocol {
     weak var view: ImagesListViewViewControllerProtocol?
     private var imagesListService = ImagesListService.shared
     private var imagesListServiceObserver: NSObjectProtocol?
-    
+    var photos: [Photo] = ImagesListService.shared.photos
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
@@ -25,7 +25,7 @@ final class ImagesListPresenter: ImagesListPresenterProtocol {
     func timeSetup(_ date: Date) -> String {
         dateFormatter.string(from: date)
     }
-   
+    
     func getCellURL(indexPath: IndexPath) -> (thumbUrl: URL, largeUrl: URL)? {
         guard let imageCellThumbURL = imagesListService.photos[indexPath.row].thumbImageURL,
               let imageCellLargeURL = imagesListService.photos[indexPath.row].largeImageURL,

@@ -2,7 +2,7 @@ import UIKit
 import Kingfisher
 
 
-protocol ProfileViewViewControllerProtocol: AnyObject {
+public protocol ProfileViewViewControllerProtocol: AnyObject {
     var presenter: ProfilePresenterProtocol? { get set }
     func updateAvatar()
 }
@@ -57,11 +57,9 @@ final class ProfileViewController: UIViewController, ProfileViewViewControllerPr
          }
     
     func updateProfileDetails() {
-        var profileDetails: [String]?
-        profileDetails = presenter?.updateProfileDetails()
-        profileName.text = profileDetails?[0]
-        profileTag.text = profileDetails?[1]
-        profileInfo.text = profileDetails?[2]
+        profileName.text = presenter?.updateProfileDetails()?.profileName
+        profileTag.text = presenter?.updateProfileDetails()?.profileTag
+        profileInfo.text = presenter?.updateProfileDetails()?.profileInfo
 
     }
     

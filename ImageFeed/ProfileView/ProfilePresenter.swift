@@ -2,10 +2,10 @@ import UIKit
 import WebKit
 
 
-protocol ProfilePresenterProtocol {
+public protocol ProfilePresenterProtocol {
     var view: ProfileViewViewControllerProtocol? { get set}
     func getAvatarURL() -> URL?
-    func updateProfileDetails() -> [String]?
+    func updateProfileDetails() -> (profileName: String, profileTag: String, profileInfo: String)?
     func logOut()
     static func cleanSession()
 }
@@ -16,12 +16,12 @@ final class ProfilePreseter: ProfilePresenterProtocol {
     private var profileImageServiceObserver: NSObjectProtocol?
     
     func switchToSplashViewController() {
-       guard let window = UIApplication.shared.windows.first else {
-           assertionFailure("Invalid Configuration")
-           return
-       }
-       window.rootViewController = SplashViewController()
-   }
+        guard let window = UIApplication.shared.windows.first else {
+            assertionFailure("Invalid Configuration")
+            return
+        }
+        window.rootViewController = SplashViewController()
+    }
     
     func getAvatarURL() -> URL? {
         guard
@@ -31,13 +31,13 @@ final class ProfilePreseter: ProfilePresenterProtocol {
         return url
     }
     
-    func updateProfileDetails() -> [String]? {
+    func updateProfileDetails() -> (profileName: String, profileTag: String, profileInfo: String)? {
         guard
             let profileName = profileService.profile?.name,
             let profileTag = profileService.profile?.loginName,
             let profileInfo = profileService.profile?.bio
         else { return nil }
-        return [profileName, profileTag, profileInfo]
+        return (profileName, profileTag, profileInfo)
     }
     
     func logOut() {
@@ -57,15 +57,15 @@ final class ProfilePreseter: ProfilePresenterProtocol {
             ) { [weak self]  _ in
                 guard let self = self else { return }
                 self.view?.updateAvatar()
-        }
+            }
     }
     
     static func cleanSession() {
-           HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
-           WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
-              records.forEach { record in
-                 WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
-           }
+        HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
+        WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
+            records.forEach { record in
+                WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
+            }
         }
     }
 }

@@ -16,7 +16,7 @@ final class ImagesListViewController: UIViewController & ImagesListViewViewContr
     private let ShowSingleImageSegueIdentifier = "ShowSingleImage"
     private let imagesListService = ImagesListService.shared
     var photos: [Photo] = []
-
+    
     func configure(_ presenter: ImagesListPresenterProtocol) {
         self.presenter = presenter
         self.presenter?.view = self
@@ -54,7 +54,6 @@ final class ImagesListViewController: UIViewController & ImagesListViewViewContr
         super.viewDidLoad()
         presenter?.viewDidLoad()
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
-        imagesListService.fetchPhotosNextPage()
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -67,8 +66,8 @@ extension ImagesListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let imageHeight = imagesListService.photos[indexPath.row].size.height
-        let imageWidth = imagesListService.photos[indexPath.row].size.width
+        guard let imageHeight = presenter?.view?.photos[indexPath.row].size.height,
+              let imageWidth = presenter?.view?.photos[indexPath.row].size.width else { return 0}
         let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
         let imageViewWidth = tableView.bounds.width - imageInsets.left - imageInsets.right
         let scale = imageViewWidth / imageWidth

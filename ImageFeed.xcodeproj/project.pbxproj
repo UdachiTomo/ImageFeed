@@ -27,8 +27,6 @@
 		CE3F16B42A07F775004CADD2 /* WebViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3F16B32A07F775004CADD2 /* WebViewPresenter.swift */; };
 		CE3F16B62A08001A004CADD2 /* AuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3F16B52A08001A004CADD2 /* AuthHelper.swift */; };
 		CE3F16BE2A081836004CADD2 /* WebViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3F16BD2A081836004CADD2 /* WebViewTests.swift */; };
-		CE3F16C52A0BE1EB004CADD2 /* WebViewPresenterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3F16C42A0BE1EB004CADD2 /* WebViewPresenterSpy.swift */; };
-		CE3F16C72A0BE3DD004CADD2 /* WebViewViewControllerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3F16C62A0BE3DD004CADD2 /* WebViewViewControllerSpy.swift */; };
 		CE3F16CF2A0BEAB8004CADD2 /* ImageFeedUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3F16CE2A0BEAB8004CADD2 /* ImageFeedUITests.swift */; };
 		CE3F16D12A0BEAB8004CADD2 /* ImageFeedUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3F16D02A0BEAB8004CADD2 /* ImageFeedUITestsLaunchTests.swift */; };
 		CE3F16D82A0D2560004CADD2 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3F16D72A0D2560004CADD2 /* ProfilePresenter.swift */; };
@@ -43,6 +41,9 @@
 		CE748DED29B6428600C98A6A /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE748DEC29B6428600C98A6A /* SingleImageViewController.swift */; };
 		CEBC77C82A11111A0006F096 /* ImagesListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC77C72A11111A0006F096 /* ImagesListPresenter.swift */; };
 		CEBC77CA2A1130A00006F096 /* AlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC77C92A1130A00006F096 /* AlertPresenter.swift */; };
+		CEBC77CB2A11471C0006F096 /* WebViewPresenterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3F16C42A0BE1EB004CADD2 /* WebViewPresenterSpy.swift */; };
+		CEBC77CC2A1147220006F096 /* WebViewViewControllerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3F16C62A0BE3DD004CADD2 /* WebViewViewControllerSpy.swift */; };
+		CEBC77CE2A1147540006F096 /* ProfilePresentSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBC77CD2A1147540006F096 /* ProfilePresentSpy.swift */; };
 		CECE56E329BE18D2000B34E2 /* Resourses.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE56E229BE18D2000B34E2 /* Resourses.swift */; };
 		CECE56E629BE1BAB000B34E2 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE56E529BE1BAB000B34E2 /* UIColor.swift */; };
 		CED4F7AB29B6105F00807B78 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4F7AA29B6105F00807B78 /* ProfileViewController.swift */; };
@@ -106,6 +107,7 @@
 		CE748DEC29B6428600C98A6A /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 		CEBC77C72A11111A0006F096 /* ImagesListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListPresenter.swift; sourceTree = "<group>"; };
 		CEBC77C92A1130A00006F096 /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
+		CEBC77CD2A1147540006F096 /* ProfilePresentSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresentSpy.swift; sourceTree = "<group>"; };
 		CECE56E229BE18D2000B34E2 /* Resourses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resourses.swift; sourceTree = "<group>"; };
 		CECE56E529BE1BAB000B34E2 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		CED4F7AA29B6105F00807B78 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -158,8 +160,6 @@
 				CE13EFD129C8A2BE001E3E76 /* WebViewViewController.swift */,
 				CE3F16B32A07F775004CADD2 /* WebViewPresenter.swift */,
 				CE3F16B52A08001A004CADD2 /* AuthHelper.swift */,
-				CE3F16C42A0BE1EB004CADD2 /* WebViewPresenterSpy.swift */,
-				CE3F16C62A0BE3DD004CADD2 /* WebViewViewControllerSpy.swift */,
 			);
 			path = AuthView;
 			sourceTree = "<group>";
@@ -175,7 +175,10 @@
 		CE3F16BC2A081836004CADD2 /* ImageFeedTests */ = {
 			isa = PBXGroup;
 			children = (
+				CE3F16C62A0BE3DD004CADD2 /* WebViewViewControllerSpy.swift */,
+				CE3F16C42A0BE1EB004CADD2 /* WebViewPresenterSpy.swift */,
 				CE3F16BD2A081836004CADD2 /* WebViewTests.swift */,
+				CEBC77CD2A1147540006F096 /* ProfilePresentSpy.swift */,
 			);
 			path = ImageFeedTests;
 			sourceTree = "<group>";
@@ -425,7 +428,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEBC77CE2A1147540006F096 /* ProfilePresentSpy.swift in Sources */,
 				CE3F16BE2A081836004CADD2 /* WebViewTests.swift in Sources */,
+				CEBC77CC2A1147220006F096 /* WebViewViewControllerSpy.swift in Sources */,
+				CEBC77CB2A11471C0006F096 /* WebViewPresenterSpy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,7 +454,6 @@
 				CE3B9E4D29F2C82A003FD536 /* ImagesListService.swift in Sources */,
 				CED4F7AB29B6105F00807B78 /* ProfileViewController.swift in Sources */,
 				CE13EFCD29C88B15001E3E76 /* OAuthConfiguration.swift in Sources */,
-				CE3F16C52A0BE1EB004CADD2 /* WebViewPresenterSpy.swift in Sources */,
 				CE3B9E6029F81F21003FD536 /* Extension Array.swift in Sources */,
 				CE70F96629A122FF00716648 /* ImagesListViewController.swift in Sources */,
 				CEDB171429D1E4280047A1EF /* SplashViewController.swift in Sources */,
@@ -471,7 +476,6 @@
 				CE70F96229A122FF00716648 /* AppDelegate.swift in Sources */,
 				CE70F96429A122FF00716648 /* SceneDelegate.swift in Sources */,
 				CE3B9E5E29F6CE42003FD536 /* ImagesListModels.swift in Sources */,
-				CE3F16C72A0BE3DD004CADD2 /* WebViewViewControllerSpy.swift in Sources */,
 				CEBC77C82A11111A0006F096 /* ImagesListPresenter.swift in Sources */,
 				CEBC77CA2A1130A00006F096 /* AlertPresenter.swift in Sources */,
 			);
