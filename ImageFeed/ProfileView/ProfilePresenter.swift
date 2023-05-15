@@ -6,6 +6,7 @@ public protocol ProfilePresenterProtocol {
     var view: ProfileViewViewControllerProtocol? { get set}
     func getAvatarURL() -> URL?
     func updateProfileDetails() -> (profileName: String, profileTag: String, profileInfo: String)?
+    func showAlert(vc: UIViewController)
     func logOut()
     static func cleanSession()
 }
@@ -38,6 +39,18 @@ final class ProfilePreseter: ProfilePresenterProtocol {
             let profileInfo = profileService.profile?.bio
         else { return nil }
         return (profileName, profileTag, profileInfo)
+    }
+    
+    func showAlert(vc: UIViewController) {
+        let alertController = UIAlertController(title: "Выход",
+                                                message: "Вы уверены что хотите выйти?",
+                                                preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { [weak self] action in
+            guard let self = self else {return}
+            self.logOut()
+        }))
+        alertController.addAction(UIAlertAction(title: "Нет", style: .default))
+        vc.present(alertController, animated: true)
     }
     
     func logOut() {

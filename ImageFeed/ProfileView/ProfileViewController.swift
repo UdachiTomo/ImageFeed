@@ -114,24 +114,11 @@ final class ProfileViewController: UIViewController, ProfileViewViewControllerPr
     }
     
     @objc private func didTapButton(){
-        showAlert()
+        presenter?.showAlert(vc: self)
     }
     
     private func logOut() {
         presenter?.logOut()
-    }
-    
-    
-    private func showAlert() {
-        let alertController = UIAlertController(title: "Выход",
-                                                message: "Вы уверены что хотите выйти?",
-                                                preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Да", style: .default, handler: { [weak self] action in
-            guard let self = self else {return}
-            self.logOut()
-        }))
-        alertController.addAction(UIAlertAction(title: "Нет", style: .default))
-        present(alertController, animated: true)
     }
  
     override func viewDidLoad() {
