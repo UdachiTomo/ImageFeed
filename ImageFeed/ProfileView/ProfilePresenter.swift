@@ -8,10 +8,11 @@ public protocol ProfilePresenterProtocol {
     func updateProfileDetails() -> (profileName: String, profileTag: String, profileInfo: String)?
     func showAlert(vc: UIViewController)
     func logOut()
+    func viewDidLoad()
     static func cleanSession()
 }
 
-final class ProfilePreseter: ProfilePresenterProtocol {
+final class ProfilePresenter: ProfilePresenterProtocol {
     weak var view: ProfileViewViewControllerProtocol?
     private var profileService = ProfileService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
@@ -54,7 +55,7 @@ final class ProfilePreseter: ProfilePresenterProtocol {
     }
     
     func logOut() {
-        ProfilePreseter.cleanSession()
+        ProfilePresenter.cleanSession()
         ProfileService.shared.cleanSession()
         ProfileImageService.shared.cleanSession()
         ImagesListService.shared.cleanSession()

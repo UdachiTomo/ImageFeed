@@ -9,7 +9,7 @@ final class TabBarController: UITabBarController {
         imageListViewController.configure(ImagesListPresenter())
         
         let profileViewController = ProfileViewController()
-        profileViewController.configure(ProfilePreseter())
+        profileViewController.configure(ProfilePresenter())
         profileViewController.updateAvatar()
         profileViewController.updateProfileDetails()
         profileViewController.tabBarItem = UITabBarItem(title: nil,
