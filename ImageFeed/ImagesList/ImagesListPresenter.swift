@@ -1,26 +1,39 @@
 import UIKit
 
-public protocol ImagesListPresenterProtocol {
+public protocol ImagesListPresenterProtocol: AnyObject {
     var view: ImagesListViewViewControllerProtocol? { get set }
+    var photos: [Photo] {get set}
     func timeSetup(_ date: Date) -> String
     func getCellURL(indexPath: IndexPath) -> (thumbUrl: URL, largeUrl: URL)?
     func getDateCell(indexPath: IndexPath) -> Date?
     func isLiked(indexPath: IndexPath) -> Bool
     func imageListCellDidTapLike(_ cell: ImagesListCell, indexPath: IndexPath)
     func viewDidLoad()
+    func updateViewTable()
+    func fetchPhotosNextPage()
 }
 
 final class ImagesListPresenter: ImagesListPresenterProtocol {
     weak var view: ImagesListViewViewControllerProtocol?
     private var imagesListService = ImagesListService.shared
     private var imagesListServiceObserver: NSObjectProtocol?
-    var photos: [Photo] = ImagesListService.shared.photos
+    var photos: [Photo] = []
+    
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
         formatter.timeStyle = .none
         return formatter
     }()
+    
+    func updateViewTable() {
+        let oldCount = photos.count
+        let newCount = imagesListService.photos.count
+        photos = imagesListService.photos
+        if oldCount != newCount {
+            view?.updateTableViewAnimated(oldCount: oldCount, newCount: newCount)
+        }
+    }
     
     func timeSetup(_ date: Date) -> String {
         dateFormatter.string(from: date)
@@ -45,20 +58,24 @@ final class ImagesListPresenter: ImagesListPresenterProtocol {
     }
     
     func imageListCellDidTapLike(_ cell: ImagesListCell, indexPath: IndexPath) {
-        let photo = view?.photos[indexPath.row]
+        let photo = photos[indexPath.row]
         UIBlockingProgressHUD.show()
-        imagesListService.changeLike(photoId: photo?.id ?? "", isLike: photo?.isLiked ?? true) { result in
+        imagesListService.changeLike(photoId: photo.id , isLike: photo.isLiked ) { result in
             DispatchQueue.main.async { [weak self] in
                 switch result {
                 case .success:
-                    self?.view?.photos = self?.imagesListService.photos ?? []
-                    cell.setIsLiked(isLiked: self?.view?.photos[indexPath.row].isLiked ?? true)
+                    self?.photos = self?.imagesListService.photos ?? []
+                    cell.setIsLiked(isLiked: self?.photos[indexPath.row].isLiked ?? true)
                     UIBlockingProgressHUD.dismiss()
                 case .failure:
                     UIBlockingProgressHUD.dismiss()
                 }
             }
         }
+    }
+    
+    func fetchPhotosNextPage(){
+        imagesListService.fetchPhotosNextPage()
     }
     
     func viewDidLoad() {
@@ -69,7 +86,7 @@ final class ImagesListPresenter: ImagesListPresenterProtocol {
             queue: .main
         ) { [ weak self ] _ in
             guard let self = self else { return }
-            self.view?.updateTableViewAnimated()
+            self.updateViewTable()
         }
     }
 }

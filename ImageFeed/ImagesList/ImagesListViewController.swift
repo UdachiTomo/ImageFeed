@@ -3,8 +3,7 @@ import Kingfisher
 
 public protocol ImagesListViewViewControllerProtocol: AnyObject {
     var presenter: ImagesListPresenterProtocol? { get set }
-    var photos: [Photo] { get set }
-    func updateTableViewAnimated()
+    func updateTableViewAnimated(oldCount: Int, newCount: Int)
 }
 
 final class ImagesListViewController: UIViewController & ImagesListViewViewControllerProtocol {
@@ -14,27 +13,19 @@ final class ImagesListViewController: UIViewController & ImagesListViewViewContr
     @IBOutlet private weak var tableView: UITableView!
     
     private let ShowSingleImageSegueIdentifier = "ShowSingleImage"
-    private let imagesListService = ImagesListService.shared
-    var photos: [Photo] = []
     
     func configure(_ presenter: ImagesListPresenterProtocol) {
         self.presenter = presenter
         self.presenter?.view = self
     }
     
-    func updateTableViewAnimated() {
-        let oldCount = photos.count
-        let newCount = imagesListService.photos.count
-        photos = imagesListService.photos
-        if oldCount != newCount {
-            
-            tableView.performBatchUpdates {
-                let indexPath = (oldCount..<newCount).map { i in
-                    IndexPath(row: i, section: 0)
-                }
-                tableView.insertRows(at: indexPath, with: .automatic)
-            } completion: { _ in }
-        }
+    func updateTableViewAnimated(oldCount: Int, newCount: Int) {
+        tableView.performBatchUpdates {
+            let indexPath = (oldCount..<newCount).map { i in
+                IndexPath(row: i, section: 0)
+            }
+            tableView.insertRows(at: indexPath, with: .automatic)
+        } completion: { _ in }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -53,12 +44,12 @@ final class ImagesListViewController: UIViewController & ImagesListViewViewContr
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad()
+        presenter?.updateViewTable()
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
         tableView.delegate = self
         tableView.dataSource = self
     }
 }
-
 extension ImagesListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -66,8 +57,8 @@ extension ImagesListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let imageHeight = presenter?.view?.photos[indexPath.row].size.height,
-              let imageWidth = presenter?.view?.photos[indexPath.row].size.width else { return 0}
+        guard let imageHeight = presenter?.photos[indexPath.row].size.height,
+              let imageWidth = presenter?.photos[indexPath.row].size.width else { return 0}
         let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
         let imageViewWidth = tableView.bounds.width - imageInsets.left - imageInsets.right
         let scale = imageViewWidth / imageWidth
@@ -79,12 +70,13 @@ extension ImagesListViewController: UITableViewDelegate {
 extension ImagesListViewController: UITableViewDataSource {
     
     func tableView( _ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter?.view?.photos.count ?? 0
+        guard let photos = presenter?.photos.count else { return 0 }
+        return photos
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == tableView.numberOfRows(inSection: 0) - 1 {
-            imagesListService.fetchPhotosNextPage()
+            presenter?.fetchPhotosNextPage()
         }
     }
     
