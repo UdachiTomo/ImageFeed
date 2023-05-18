@@ -3,7 +3,7 @@ import Foundation
 
 final class ImagesListPresenterSpy: ImagesListPresenterProtocol {
     var view: ImageFeed.ImagesListViewViewControllerProtocol?
-    
+    var viewDidLoadCheck: Bool = true
     var photos: [ImageFeed.Photo] = []
     
     func timeSetup(_ date: Date) -> String {
@@ -27,7 +27,7 @@ final class ImagesListPresenterSpy: ImagesListPresenterProtocol {
     }
     
     func viewDidLoad() {
-        
+        viewDidLoadCheck = true
     }
     
     func updateViewTable() {

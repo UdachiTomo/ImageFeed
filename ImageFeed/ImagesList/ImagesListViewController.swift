@@ -45,9 +45,9 @@ final class ImagesListViewController: UIViewController & ImagesListViewViewContr
         super.viewDidLoad()
         presenter?.viewDidLoad()
         presenter?.updateViewTable()
-        tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
-        tableView.delegate = self
-        tableView.dataSource = self
+        tableView?.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+        tableView?.delegate = self
+        tableView?.dataSource = self
     }
 }
 extension ImagesListViewController: UITableViewDelegate {

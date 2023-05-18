@@ -14,9 +14,9 @@ struct PhotoResult: Decodable {
     let id: String
     let createdAt: String?
     let welcomeDescription: String?
-    let isLiked: Bool?
-    let width : Int?
-    let height: Int?
+    let isLiked: Bool
+    let width : Int
+    let height: Int
     let urls: UrlsResult?
     
     enum CodingKeys: String, CodingKey {
