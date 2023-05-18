@@ -35,8 +35,7 @@ final class ImagesListService {
                                                  welcomeDescription: image.welcomeDescription,
                                                  thumbImageURL: thumbImage,
                                                  largeImageURL: fullImage,
-                                                 isLiked: image.isLiked ))
-                        print(self.photos)
+                                                 isLiked: image.isLiked ?? false ))
                     }
                     NotificationCenter.default.post(name: ImagesListService.didChangeNotification,
                                                     object: self,
